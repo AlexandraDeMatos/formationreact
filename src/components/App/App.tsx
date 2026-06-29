@@ -1,12 +1,31 @@
+import { useState } from "react";
 import Button from "../uis/Button/Button";
 
-const App = () => {
+const App:React.FC<undefined> = () => {
+  const [counter, setCounter] = useState(0);
+
   return (
     <>
       <p>Formation React</p>
-      <Button onClicked={() => console.log('ok')} children="Validé" color="green"></Button>
-      <Button onClicked={() => console.log('cancel')}  children="Annulé" color="tomato" type="reset"></Button>
-      <Button onClicked={() => console.log('test')}  color="tomato" type="reset"><img src="favicon.svg" alt="" /></Button>
+      <p>Compteur : {counter}</p>
+
+      <Button 
+        onClicked={() => {
+          setCounter(counter+1);
+          console.log(counter);
+        }} 
+        color="green">
+          +1
+      </Button>
+
+      <Button 
+        onClicked={() => {
+          setCounter(counter-1);
+          console.log(counter);
+        }} 
+        color="tomato">
+          -1
+      </Button>
     </>
   );
 };
