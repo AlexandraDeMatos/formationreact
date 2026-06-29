@@ -4,8 +4,9 @@ const App = () => {
   return (
     <>
       <p>Formation React</p>
-      <Button onClick={() => console.log('ok')} text="Validé" color="green"></Button>
-      <Button onClick={() => console.log('cancel')}  text="Annulé" color="tomato"></Button>
+      <Button onClicked={() => console.log('ok')} children="Validé" color="green"></Button>
+      <Button onClicked={() => console.log('cancel')}  children="Annulé" color="tomato" type="reset"></Button>
+      <Button onClicked={() => console.log('test')}  color="tomato" type="reset"><img src="favicon.svg" alt="" /></Button>
     </>
   );
 };
