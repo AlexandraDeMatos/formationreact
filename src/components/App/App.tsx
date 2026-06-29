@@ -3,8 +3,9 @@ import Button from "../uis/Button/Button";
 const App = () => {
   return (
     <>
-      <p>TEST</p>
-      <Button/>
+      <p>Formation React</p>
+      <Button onClick={() => console.log('ok')} text="Validé" color="green"></Button>
+      <Button onClick={() => console.log('cancel')}  text="Annulé" color="tomato"></Button>
     </>
   );
 };
