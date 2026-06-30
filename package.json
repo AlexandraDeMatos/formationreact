@@ -14,7 +14,9 @@
     "gen": "npx generate-react-cli c"
   },
   "dependencies": {
+    "bootstrap": "5",
     "react": "^19.2.7",
+    "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.7"
   },
   "devDependencies": {
