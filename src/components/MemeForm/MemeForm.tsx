@@ -1,6 +1,6 @@
 import { useEffect, useState, type FC } from "react";
 import styles from "./MemeForm.module.css";
-import type { MemeInterface } from "orsys-tjs-meme";
+import { emptyMeme, type MemeInterface } from "orsys-tjs-meme";
 import { Button } from "react-bootstrap";
 
 interface IMemeFormProps {
@@ -9,11 +9,11 @@ interface IMemeFormProps {
 }
 
 const MemeForm: FC<IMemeFormProps> = ({meme, onMemeChange}) => {
-  const [state, setState] = useState(meme);
+  const [state, setState] = useState(emptyMeme);
 
   useEffect(() => {
-    onMemeChange(state)
-  }, [state, onMemeChange]);
+    setState(state)
+  }, []);
 
   const onMemeTextValueChange=(evt:React.ChangeEvent<HTMLInputElement, HTMLInputElement>)=>{
     switch (evt.target.name) {
@@ -22,29 +22,30 @@ const MemeForm: FC<IMemeFormProps> = ({meme, onMemeChange}) => {
       case 'y':
       case 'frameSizeX':
       case 'frameSizeY':
-        setState({...meme, [evt.target.name]: parseInt(evt.target.value)});
+        onMemeChange({...meme, [evt.target.name]: parseInt(evt.target.value)});
         break;
       case 'underline':
       case 'italic':
-        setState({...meme, [evt.target.name]: evt.target.checked});
+        onMemeChange({...meme, [evt.target.name]: evt.target.checked});
         break;
       default:
-        setState({...meme, [evt.target.name]: evt.target.value});
+        onMemeChange({...meme, [evt.target.name]: evt.target.value});
         break;
     }
   };
 
   return (
     <div className={styles.MemeForm} data-testid="MemeForm">
-      <form onSubmit={(evt)=>{
+      <form onSubmit={(evt) => {
         evt.preventDefault();
-        //onMemeChange(state);
-      }}>
+      }}
+      
+      onReset={() => onMemeChange(state)}>
         <label htmlFor="titre">
           <h1>Titre</h1>
         </label>
         <br />
-        <input name="titre" id="titre" value={state.titre} onChange={onMemeTextValueChange}/>
+        <input name="titre" id="titre" value={meme.titre} onChange={onMemeTextValueChange}/>
         <hr />
         <label htmlFor="image">
           <h2>Image</h2>
@@ -61,7 +62,7 @@ const MemeForm: FC<IMemeFormProps> = ({meme, onMemeChange}) => {
           <h2>texte</h2>
         </label>
         <br />
-        <input name="text" id="text" type="text" value={state.text}  onChange={onMemeTextValueChange}/>
+        <input name="text" id="text" type="text" value={meme.text}  onChange={onMemeTextValueChange}/>
         <br />
         <label htmlFor="x">
           <h2 style={{ display: "inline" }}>x :</h2>
@@ -71,7 +72,7 @@ const MemeForm: FC<IMemeFormProps> = ({meme, onMemeChange}) => {
           name="x"
           id="x"
           type="number"
-          value={state.x}
+          value={meme.x}
           onChange={onMemeTextValueChange}
         />
         <label htmlFor="y">
@@ -82,7 +83,7 @@ const MemeForm: FC<IMemeFormProps> = ({meme, onMemeChange}) => {
           name="y"
           id="y"
           type="number"
-          value={state.y}
+          value={meme.y}
           onChange={onMemeTextValueChange}
         />
         <hr />
@@ -91,7 +92,7 @@ const MemeForm: FC<IMemeFormProps> = ({meme, onMemeChange}) => {
         <label htmlFor="color">
           <h2 style={{ display: "inline" }}>color :</h2>
         </label>
-        <input name="color" id="color" type="color" value={state.color} onChange={onMemeTextValueChange}/>
+        <input name="color" id="color" type="color" value={meme.color} onChange={onMemeTextValueChange}/>
         <br />
         <label htmlFor="fontSize">
           <h2 style={{ display: "inline" }}>font-size :</h2>
@@ -102,7 +103,7 @@ const MemeForm: FC<IMemeFormProps> = ({meme, onMemeChange}) => {
           id="fontSize"
           type="number"
           min="0"
-          value={state.fontSize}
+          value={meme.fontSize}
           onChange={onMemeTextValueChange}
         />
         px
@@ -118,7 +119,7 @@ const MemeForm: FC<IMemeFormProps> = ({meme, onMemeChange}) => {
           min="100"
           step="100"
           max="900"
-          value={state.fontWeight}
+          value={meme.fontWeight}
           onChange={onMemeTextValueChange}
         />
         <br />
@@ -144,7 +145,7 @@ const MemeForm: FC<IMemeFormProps> = ({meme, onMemeChange}) => {
           id="frameSizeX"
           type="number"
           min="0"
-          value={state.frameSizeX}
+          value={meme.frameSizeX}
           onChange={onMemeTextValueChange}
         />
         px <br />
@@ -157,7 +158,7 @@ const MemeForm: FC<IMemeFormProps> = ({meme, onMemeChange}) => {
           id="frameSizeY"
           type="number"
           min="0"
-          value={state.frameSizeY}
+          value={meme.frameSizeY}
           onChange={onMemeTextValueChange}
         />
         px
