@@ -1,3 +1,4 @@
+import { emptyMeme, MemeSVGViewer } from "orsys-tjs-meme";
 import FlexH1Grow from "../layouts/FlexH1Grow/FlexH1Grow";
 import FlexV3Grow from "../layouts/FlexV3Grow/FlexV3Grow";
 import MemeForm from "../MemeForm/MemeForm";
@@ -10,7 +11,10 @@ const App:React.FC<undefined> = () => {
     <FlexV3Grow>
       <Header/>
       <Navbar/>
-      <FlexH1Grow><div>Viewer</div><MemeForm/></FlexH1Grow>
+      <FlexH1Grow>
+        <MemeSVGViewer meme={emptyMeme} image={undefined} basePath=""/>
+        <MemeForm/>
+      </FlexH1Grow>
       <Footer/>
     </FlexV3Grow>
   );
