@@ -1,38 +1,18 @@
-import { useEffect, useState } from "react";
-import Button from "../uis/Button/Button";
+import FlexH1Grow from "../layouts/FlexH1Grow/FlexH1Grow";
+import FlexV3Grow from "../layouts/FlexV3Grow/FlexV3Grow";
+import MemeForm from "../MemeForm/MemeForm";
+import Footer from "../uis/Footer/Footer";
+import Header from "../uis/Header/Header";
+import Navbar from "../uis/Navbar/Navbar";
 
 const App:React.FC<undefined> = () => {
-  const [counter, setCounter] = useState(0);
-
-  useEffect (() => {
-    console.log(counter);
-  }, [counter]);
-
-  useEffect (() => {
-    setCounter(10);
-  }, []);
-
   return (
-    <>
-      <p>Formation React</p>
-      <p>Compteur : {counter}</p>
-
-      <Button 
-        onClicked={() => {
-          setCounter(counter+1);
-        }} 
-        color="green">
-          +1
-      </Button>
-
-      <Button 
-        onClicked={() => {
-          setCounter(counter-1);
-        }} 
-        color="tomato">
-          -1
-      </Button>
-    </>
+    <FlexV3Grow>
+      <Header/>
+      <Navbar/>
+      <FlexH1Grow><div>Viewer</div><MemeForm/></FlexH1Grow>
+      <Footer/>
+    </FlexV3Grow>
   );
 };
 
