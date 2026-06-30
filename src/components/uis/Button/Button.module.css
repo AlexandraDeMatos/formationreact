@@ -16,6 +16,6 @@
 }
 
 .clicked {
-    box-shadow: 0 0 0;
-    border: 1px solid yellow;
+    box-shadow: 0 0 0 !important;
+    border: 1px solid yellow !important;
 }

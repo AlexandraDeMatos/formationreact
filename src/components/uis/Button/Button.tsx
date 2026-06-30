@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import style from './Button.module.css';
 
 interface IButtonProps {
@@ -12,19 +13,27 @@ interface IButtonProps {
  * @returns React.ReactNode constitution du composant bouton
  */
 const Button = ({type = 'button', children, color, onClicked=()=>{}}:IButtonProps) => {  
-  return (
-    <button 
-        className={style.Button + ' DarkBackground'} 
-        style={{color:color}}
-        onClick={(evt) => {
-            console.log(evt)
-            onClicked()
-        }}
-        type={type}
-    >
-        {children}
-    </button>
-  )
+    const [isClicked, setIsClicked] = useState(false);
+
+    useEffect (() => {
+        setTimeout(() => {
+            setIsClicked(false);
+        }, 1000);
+    }, [isClicked]);
+    
+    return (
+        <button 
+            className={`${style.Button} DarkBackground${isClicked?' '+style.clicked:''}`} 
+            style={{color:color}}
+            onClick={() => {
+                setIsClicked(true);
+                onClicked()
+            }}
+            type={type}
+        >
+            {children}
+        </button>
+    );
 }
 
 export default Button
