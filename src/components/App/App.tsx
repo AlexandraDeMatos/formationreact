@@ -21,7 +21,7 @@ const App: React.FC<undefined> = () => {
       <Header />
       <Navbar />
       <FlexH1Grow>
-        <MemeSVGViewer meme={current} image={undefined} basePath="" />
+        <MemeSVGViewer meme={current} image={imagesFromJson.find(image => image.id === current.imageId)} basePath="" />
         <MemeForm
           images={imagesFromJson}
           meme={current}

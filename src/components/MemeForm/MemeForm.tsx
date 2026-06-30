@@ -16,18 +16,19 @@ const MemeForm: FC<IMemeFormProps> = ({images, meme, onMemeChange}) => {
     setState(state)
   }, []);
 
-  const onMemeTextValueChange=(evt:React.ChangeEvent<HTMLInputElement, HTMLInputElement>)=>{
+  const onMemeTextValueChange=(evt:React.ChangeEvent<HTMLInputElement|HTMLSelectElement>)=>{
     switch (evt.target.name) {
       case 'fontsize':
       case 'x':
       case 'y':
       case 'frameSizeX':
       case 'frameSizeY':
+      case 'imageId':
         onMemeChange({...meme, [evt.target.name]: parseInt(evt.target.value)});
         break;
       case 'underline':
       case 'italic':
-        onMemeChange({...meme, [evt.target.name]: evt.target.checked});
+        onMemeChange({...meme, [evt.target.name]: (evt.target as HTMLInputElement).checked});
         break;
       default:
         onMemeChange({...meme, [evt.target.name]: evt.target.value});
@@ -52,11 +53,11 @@ const MemeForm: FC<IMemeFormProps> = ({images, meme, onMemeChange}) => {
           <h2>Image</h2>
         </label>
         <br />
-        <select name="image" id="image">
+        <select name="imageId" id="imageId" onChange={onMemeTextValueChange} value={meme.imageId}>
           <option value="-1">No image</option>
           {
             images.map((e,i) => {
-              return <option value={e.id}>{e.name}</option>
+              return <option key={i} value={e.id}>{e.name}</option>
             })
           }
         </select>
