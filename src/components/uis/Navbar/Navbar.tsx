@@ -3,6 +3,7 @@ import styles from './Navbar.module.css';
 import {Container, Nav, Navbar as NavBar} from 'react-bootstrap';
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.js";
+import { Link } from 'react-router'
 
 interface NavbarProps {}
 
@@ -10,11 +11,12 @@ const Navbar: FC<NavbarProps> = () => (
   <div className={styles.Navbar} data-testid="Navbar">
     <NavBar bg="dark" data-bs-theme="dark">
       <Container>
-        <NavBar.Brand href="#home">Navbar</NavBar.Brand>
+        <Link to={'/'} className='navbar-brand'>Home</Link>
         <Nav className="me-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#features">Features</Nav.Link>
-          <Nav.Link href="#pricing">Pricing</Nav.Link>
+          <Link to={'/'} className='nav-link'>Home</Link>
+          <Link to={'/editor'} className='nav-link'>New</Link>
+          <Link to={'/editor/2'} className='nav-link'>Edition id:2</Link>
+          <Link to={'/thumbnail'} className='nav-link'>Thumbnail</Link>
         </Nav>
       </Container>
     </NavBar>

@@ -1,6 +1,5 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import ressourcesReducer, { addSingleMeme } from "./slices/ressources";
-import { emptyMeme } from "orsys-tjs-meme";
+import { configureStore } from "@reduxjs/toolkit";
+import ressourcesReducer from "./slices/ressources";
 import currentReducer from "./slices/current";
 import { initialRessourcesLoad } from "./asyncCaller/asyncRessources";
 
