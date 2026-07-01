@@ -1,1 +1,7 @@
-.Thumbnails {}
+.Thumbnails {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    height: calc(100vh - 200px);
+    overflow-y: scroll;
+}
