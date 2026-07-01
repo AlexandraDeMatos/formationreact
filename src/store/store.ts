@@ -1,16 +1,23 @@
-import {configureStore} from '@reduxjs/toolkit';
-import ressourcesReducer, { addSingleMeme } from './slices/ressources';
-import { DummyMeme } from 'orsys-tjs-meme/dist/interfaces/common';
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import ressourcesReducer, { addSingleMeme } from "./slices/ressources";
+import { emptyMeme } from "orsys-tjs-meme";
+import currentReducer from "./slices/current";
+import { initialRessourcesLoad } from "./asyncCaller/asyncRessources";
 
-const dummyReducer = (state={}) => {
-    return state;
-};
-export const store=configureStore({reducer: ressourcesReducer});
-
+export const store = configureStore({
+  reducer: {
+    ressources: ressourcesReducer,
+    current: currentReducer,
+  },
+});
 store.subscribe(() => {
-    console.groupCollapsed('Store');
-    console.trace('Il y a un changement :', store.getState());
-    console.groupEnd();
+  console.groupCollapsed("changement store");
+  console.trace("y a un changement:", store.getState());
+  console.groupEnd();
 });
 
-store.dispatch(addSingleMeme(DummyMeme));
+
+store.dispatch(initialRessourcesLoad())
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch
